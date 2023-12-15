@@ -122,11 +122,11 @@ def parallel(all_png):
 
     print("Num of CPU available: ", multiprocessing.cpu_count())
     # Check the number of available GPUs
-    num_gpus_available = len(tf.config.experimental.list_physical_devices('GPU'))
+    num_cpus_available = len(tf.config.experimental.list_physical_devices('CPU'))
     print("Num GPUs Available: ", num_gpus_available)
 
     # Use MirroredStrategy for data parallelism if GPUs are available
-    if num_gpus_available >= 1:
+    if num_cpus_available >= 1:
         strategy = tf.distribute.MirroredStrategy()
         with strategy.scope():
             # Define the CNN model
